@@ -5,17 +5,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object APISercice {
-        val instance: MarvelApi
 
+    private const val BASE_URL = "https://gateway.marvel.com/v1/public/"
 
-    init {
-            val retrofit = Retrofit.Builder()
-                .baseUrl(Constants.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        instance = retrofit.create(MarvelApi::class.java)
-
-
-        }
-
+    fun create(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 }
