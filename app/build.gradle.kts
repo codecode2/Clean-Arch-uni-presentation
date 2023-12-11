@@ -81,4 +81,27 @@ dependencies {
 
     // hilt and compose navigation
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+
+    //Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+
+    //Room
+    implementation( "androidx.room:room-ktx:2.6.1")
+    implementation ("androidx.room:room-runtime:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+
+    //Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+
+    //Okhhtp
+    implementation ("com.squareup.okhttp3:logging-interceptor:3.8.0")
+
+    //RxJava
+    implementation ("io.reactivex.rxjava2:rxjava:2.2.6")
+    implementation ("io.reactivex.rxjava2:rxandroid:2.1.1")
 }

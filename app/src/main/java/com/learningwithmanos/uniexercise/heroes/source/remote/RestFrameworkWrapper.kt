@@ -1,6 +1,5 @@
 package com.learningwithmanos.uniexercise.heroes.source.remote
 
-import com.learningwithmanos.uniexercise.heroes.DummyData
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import javax.inject.Inject
 
@@ -10,6 +9,10 @@ interface RestFrameworkWrapper{
 
 class DummyRestFrameworkWrapper @Inject constructor(): RestFrameworkWrapper {
     override suspend fun getHeroes(): List<Hero> {
-        return DummyData.dummyHeroList
+
+
+        
+
+        return listOf()
     }
 }
