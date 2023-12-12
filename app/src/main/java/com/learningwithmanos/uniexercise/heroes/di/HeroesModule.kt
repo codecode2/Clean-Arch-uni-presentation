@@ -1,5 +1,7 @@
 package com.learningwithmanos.uniexercise.heroes.di
 
+import com.learningwithmanos.uniexercise.heroes.api.APISercice
+import com.learningwithmanos.uniexercise.heroes.api.MarvelApi
 import com.learningwithmanos.uniexercise.heroes.repo.HeroRepository
 import com.learningwithmanos.uniexercise.heroes.repo.HeroRepositoryImpl
 import com.learningwithmanos.uniexercise.heroes.source.local.DBWrapper
@@ -18,8 +20,11 @@ import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesUCImpl
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -78,3 +83,38 @@ interface HeroesModule {
         dummyDBWrapper: DummyDBWrapper
     ): DBWrapper
 }
+
+
+
+@Module
+@InstallIn(SingletonComponent::class)
+
+
+object  networkModule
+{
+
+    //Retrofit
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://gateway.marvel.com/v1/public/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+
+
+    @Provides
+    @Singleton
+    fun provideMarvelApiService(retrofit: Retrofit): MarvelApi {
+        return retrofit.create(MarvelApi::class.java)
+    }
+
+
+
+
+
+}
+
