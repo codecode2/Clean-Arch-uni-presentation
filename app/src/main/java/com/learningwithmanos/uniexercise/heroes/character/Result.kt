@@ -17,7 +17,7 @@ data class Result(
 ){
 
     fun toCharacter():Hero {
-        return Hero(id = id,name=name, availableComics = comics.available, imageUrl = resourceURI)
+        return Hero(id= id, name=name, availableComics = comics.available, imageUrl = resourceURI)
 
 
     }

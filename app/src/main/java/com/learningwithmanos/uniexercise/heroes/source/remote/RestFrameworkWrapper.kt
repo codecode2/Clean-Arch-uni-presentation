@@ -34,7 +34,7 @@ class DummyRestFrameworkWrapper @Inject constructor(
                 )
             } ?: emptyList()
         } else {
-            // Consider a more nuanced approach to error handling
+
             throw Exception("Error fetching heroes: ${response.code()} - ${response.message()}")
         }
     }
