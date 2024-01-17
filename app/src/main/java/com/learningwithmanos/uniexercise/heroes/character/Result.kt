@@ -1,6 +1,7 @@
 package com.learningwithmanos.uniexercise.heroes.character
 
 import com.learningwithmanos.uniexercise.heroes.data.Hero
+import com.learningwithmanos.uniexercise.heroes.data.RHero
 
 data class Result(
     val comics: Comics,
@@ -16,9 +17,13 @@ data class Result(
     val urls: List<Url>
 ){
 
-    fun toCharacter():Hero {
+    fun toHCharacter():Hero {
         return Hero(id= id, name=name, availableComics = comics.available, imageUrl = resourceURI)
-
-
     }
+
+    fun toRCharacter(): RHero {
+        return RHero(id= id, name=name, availableComics = comics, imageUrl = thumbnail)
+    }
+
+
 }

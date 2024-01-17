@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
+import com.learningwithmanos.uniexercise.heroes.data.RHero
 
 /**
  * A repository interface that is used to coordinate the usage of the LocalSource and the
@@ -38,6 +39,8 @@ class HeroRepositoryImpl @Inject constructor(
                 flowOf(heroList)
             } else {
                 heroLocalSource.getHeroes()
+
+
             }
         }
     }
