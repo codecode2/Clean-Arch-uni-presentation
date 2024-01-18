@@ -76,7 +76,7 @@ data class HeroTileModel(
 
 fun Hero.mapHeroToHeroTileModel(): HeroTileModel {
     return HeroTileModel(
-        title = "$name, comics - $availableComics",
+        title = "$name,\n comics - $availableComics",
         imageUrl = imageUrl
 
 
