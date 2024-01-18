@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.character
+package com.learningwithmanos.uniexercise.heroes.apiresults
 
 data class Item(
     val name: String,

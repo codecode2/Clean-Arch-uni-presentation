@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.character
+package com.learningwithmanos.uniexercise.heroes.apiresults
 
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import com.learningwithmanos.uniexercise.heroes.data.RHero
@@ -22,7 +22,7 @@ data class Result(
     }
 
     fun toRCharacter(): RHero {
-        return RHero(id= id, name=name, availableComics = comics, imageUrl = thumbnail)
+        return RHero(id= id, name=name, availableComics = comics.available, imageUrl = resourceURI)
     }
 
 

@@ -1,7 +1,13 @@
 package com.learningwithmanos.uniexercise.heroes.source.remote
 
+import android.util.Log
 import com.learningwithmanos.uniexercise.heroes.api.MarvelApi
+import com.learningwithmanos.uniexercise.heroes.apiresults.MarvelResultCharacters
 import com.learningwithmanos.uniexercise.heroes.data.Hero
+import com.learningwithmanos.uniexercise.heroes.data.RHero
+import com.learningwithmanos.uniexercise.heroes.source.local.HeroLocalSource
+import com.learningwithmanos.uniexercise.heroes.source.local.MarvelDao
+import com.learningwithmanos.uniexercise.heroes.source.local.MarvelDatabase
 import com.learningwithmanos.uniexercise.heroes.utils.Constants
 import javax.inject.Inject
 
@@ -25,6 +31,8 @@ class DummyRestFrameworkWrapper @Inject constructor(
         )
 
         if (response.isSuccessful) {
+
+            Log.d("Testing", "remote call again")
             return response.body()?.data?.results?.map { marvelCharacter ->
                 Hero(
                     id = marvelCharacter.id,
@@ -32,11 +40,20 @@ class DummyRestFrameworkWrapper @Inject constructor(
                     availableComics = marvelCharacter.comics.available,
                     imageUrl = "${marvelCharacter.thumbnail.path}/portrait_incredible.${marvelCharacter.thumbnail.extension}"
                 )
+
+
             } ?: emptyList()
+
+
         } else {
 
             throw Exception("Error fetching heroes: ${response.code()} - ${response.message()}")
         }
     }
+
+
+
+
+
 
 }

@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 import com.learningwithmanos.uniexercise.heroes.data.RHero
+import com.learningwithmanos.uniexercise.heroes.source.local.MarvelDao
 
 /**
  * A repository interface that is used to coordinate the usage of the LocalSource and the
@@ -29,17 +30,19 @@ interface HeroRepository {
 class HeroRepositoryImpl @Inject constructor(
     private val heroRemoteSource: HeroRemoteSource,
     private val heroLocalSource: HeroLocalSource,
+    private val marvelDao: MarvelDao
 ) : HeroRepository {
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun getHeroes(): Flow<List<Hero>>  {
         return heroLocalSource.isHeroDataStored().flatMapLatest { isHeroDataStored ->
-            if (!isHeroDataStored) {
-                val heroList = heroRemoteSource.getHeroes()
-                heroLocalSource.storeHeroes(heroList)
-                flowOf(heroList)
-            } else {
-                heroLocalSource.getHeroes()
+             if (!isHeroDataStored)
+                {
+                   val heroList = heroRemoteSource.getHeroes()
+                   heroLocalSource.storeHeroes(heroList)
+                   flowOf()
+                 } else {
 
+                    heroLocalSource.getHeroes()
 
             }
         }

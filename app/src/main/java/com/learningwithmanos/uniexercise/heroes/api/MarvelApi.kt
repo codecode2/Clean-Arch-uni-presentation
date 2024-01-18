@@ -1,8 +1,7 @@
 package com.learningwithmanos.uniexercise.heroes.api
 
-import com.learningwithmanos.uniexercise.heroes.character.MarvelResultCharacters
+import com.learningwithmanos.uniexercise.heroes.apiresults.MarvelResultCharacters
 
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
