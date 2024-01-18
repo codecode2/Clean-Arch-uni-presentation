@@ -78,5 +78,7 @@ fun Hero.mapHeroToHeroTileModel(): HeroTileModel {
     return HeroTileModel(
         title = "$name, comics - $availableComics",
         imageUrl = imageUrl
+
+
     )
 }
