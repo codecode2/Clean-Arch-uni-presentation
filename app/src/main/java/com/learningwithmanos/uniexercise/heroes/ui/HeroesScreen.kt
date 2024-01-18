@@ -28,6 +28,7 @@ fun HeroesScreen(
 
         Column {
             ShowHeroes(heroes = heroesList.value)
+
         }
     }
 }

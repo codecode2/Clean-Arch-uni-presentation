@@ -104,4 +104,10 @@ dependencies {
     //RxJava
     implementation ("io.reactivex.rxjava2:rxjava:2.2.6")
     implementation ("io.reactivex.rxjava2:rxandroid:2.1.1")
+
+
+    //glide
+    implementation ("com.github.bumptech.glide:glide:4.4.0")
+    kapt ("com.github.bumptech.glide:compiler:4.4.0" )
+
 }
