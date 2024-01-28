@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.data
+package com.learningwithmanos.uniexercise.heroes.source.remote.data
 
 import com.google.gson.annotations.SerializedName
 

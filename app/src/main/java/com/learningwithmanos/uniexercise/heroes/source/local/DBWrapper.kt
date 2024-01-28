@@ -1,17 +1,14 @@
 package com.learningwithmanos.uniexercise.heroes.source.local
 
 import android.util.Log
-import androidx.compose.material3.MaterialTheme
+import com.learningwithmanos.uniexercise.heroes.source.local.data.LHero
+import com.learningwithmanos.uniexercise.heroes.source.local.database.MarvelDao
 import com.learningwithmanos.uniexercise.heroes.data.Hero
-import com.learningwithmanos.uniexercise.heroes.data.LHero
-import com.learningwithmanos.uniexercise.heroes.data.RHero
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
-import com.learningwithmanos.uniexercise.heroes.source.local.MarvelDao
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEmpty
 
 interface DBWrapper {
     suspend fun isHeroDataStored(): Flow<Boolean>

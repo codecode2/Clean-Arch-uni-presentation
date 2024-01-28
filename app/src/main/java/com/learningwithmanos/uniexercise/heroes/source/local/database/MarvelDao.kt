@@ -1,9 +1,9 @@
-package com.learningwithmanos.uniexercise.heroes.source.local
+package com.learningwithmanos.uniexercise.heroes.source.local.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.learningwithmanos.uniexercise.heroes.data.LHero
+import com.learningwithmanos.uniexercise.heroes.source.local.data.LHero
 import kotlinx.coroutines.flow.Flow
 
 

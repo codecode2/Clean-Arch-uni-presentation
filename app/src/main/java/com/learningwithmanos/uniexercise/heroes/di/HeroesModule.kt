@@ -1,6 +1,5 @@
 package com.learningwithmanos.uniexercise.heroes.di
 
-import com.learningwithmanos.uniexercise.heroes.api.APISercice
 import com.learningwithmanos.uniexercise.heroes.api.MarvelApi
 import com.learningwithmanos.uniexercise.heroes.repo.HeroRepository
 import com.learningwithmanos.uniexercise.heroes.repo.HeroRepositoryImpl

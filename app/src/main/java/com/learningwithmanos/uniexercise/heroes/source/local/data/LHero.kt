@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.data
+package com.learningwithmanos.uniexercise.heroes.source.local.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

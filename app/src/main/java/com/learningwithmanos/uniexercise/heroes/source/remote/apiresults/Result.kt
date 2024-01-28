@@ -1,20 +1,18 @@
-package com.learningwithmanos.uniexercise.heroes.apiresults
+package com.learningwithmanos.uniexercise.heroes.source.remote.apiresults
 
 import com.learningwithmanos.uniexercise.heroes.data.Hero
-import com.learningwithmanos.uniexercise.heroes.data.RHero
+import com.learningwithmanos.uniexercise.heroes.source.remote.data.RHero
 
 data class Result(
     val comics: Comics,
-    val description: String,
     val id: Int,
-    val modified: String,
     val name: String,
     val resourceURI: String,
     val thumbnail: Thumbnail,
 
-){
+    ){
 
-    fun toHCharacter():Hero {
+    fun toHCharacter(): Hero {
         return Hero(id= id, name=name, availableComics = comics.available, imageUrl = resourceURI)
     }
 

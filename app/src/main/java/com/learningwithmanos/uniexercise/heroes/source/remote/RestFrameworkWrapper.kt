@@ -2,12 +2,7 @@ package com.learningwithmanos.uniexercise.heroes.source.remote
 
 import android.util.Log
 import com.learningwithmanos.uniexercise.heroes.api.MarvelApi
-import com.learningwithmanos.uniexercise.heroes.apiresults.MarvelResultCharacters
 import com.learningwithmanos.uniexercise.heroes.data.Hero
-import com.learningwithmanos.uniexercise.heroes.data.RHero
-import com.learningwithmanos.uniexercise.heroes.source.local.HeroLocalSource
-import com.learningwithmanos.uniexercise.heroes.source.local.MarvelDao
-import com.learningwithmanos.uniexercise.heroes.source.local.MarvelDatabase
 import com.learningwithmanos.uniexercise.heroes.utils.Constants
 import javax.inject.Inject
 
@@ -16,12 +11,12 @@ interface RestFrameworkWrapper{
 }
 
 class DummyRestFrameworkWrapper @Inject constructor(
-    private val MarvelApi: MarvelApi
+    private val marvelApi: MarvelApi
 
 ): RestFrameworkWrapper {
     override suspend fun getHeroes(): List<Hero> {
 
-        val response = MarvelApi.getAllCharacters(
+        val response = marvelApi.getAllCharacters(
             apiKey = Constants.API_KEY,
             timestamp = Constants.timeStamp,
             hash = Constants.hash(),

@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.source.local
+package com.learningwithmanos.uniexercise.heroes.source.local.database
 
 import android.content.Context
 import androidx.room.Room

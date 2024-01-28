@@ -8,8 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
-import com.learningwithmanos.uniexercise.heroes.data.RHero
-import com.learningwithmanos.uniexercise.heroes.source.local.MarvelDao
 
 /**
  * A repository interface that is used to coordinate the usage of the LocalSource and the
