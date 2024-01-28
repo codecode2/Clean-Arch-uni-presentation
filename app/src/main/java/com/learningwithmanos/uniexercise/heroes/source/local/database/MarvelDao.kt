@@ -15,8 +15,11 @@ import kotlinx.coroutines.flow.Flow
         suspend fun insertCharacterList( hero: List<LHero>)
 
         @Query
-            ("SELECT * FROM CharacterTable")
+            ("SELECT * FROM LHero")
         fun getAllHeroes(): Flow<List<LHero>>
 
+
+        @Query("DELETE FROM LHero")
+        suspend fun deleteAllHeroes()
 
 }

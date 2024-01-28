@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.learningwithmanos.uniexercise.heroes.source.local.data.LHero
 import com.learningwithmanos.uniexercise.heroes.source.local.database.MarvelDao
 
-@Database(entities = [LHero::class], version = 1,exportSchema = false)
+@Database(entities = [LHero::class], version = 2,exportSchema = false)
 abstract class MarvelDatabase: RoomDatabase() {
     abstract  fun marvelDao(): MarvelDao
 

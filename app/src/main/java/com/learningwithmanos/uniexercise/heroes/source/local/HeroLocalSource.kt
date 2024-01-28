@@ -24,6 +24,12 @@ interface HeroLocalSource {
      * @return the list of heroes stored at the local storage
      */
     fun getHeroes(): Flow<List<Hero>>
+
+    /**
+     * @return deletes heroes stored at the local storage
+     */
+    suspend fun deleteAllHeroes()
+
 }
 
 class HeroLocalSourceImpl @Inject constructor(
@@ -42,5 +48,10 @@ class HeroLocalSourceImpl @Inject constructor(
     override fun getHeroes(): Flow<List<Hero>> {
         return dbWrapper.getHeroes()
     }
+
+    override suspend fun deleteAllHeroes() {
+        return dbWrapper.deleteHeroes()
+    }
+
 
 }

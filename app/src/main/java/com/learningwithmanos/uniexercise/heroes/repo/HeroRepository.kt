@@ -1,5 +1,6 @@
 package com.learningwithmanos.uniexercise.heroes.repo
 
+
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import com.learningwithmanos.uniexercise.heroes.source.local.HeroLocalSource
 import com.learningwithmanos.uniexercise.heroes.source.remote.HeroRemoteSource
@@ -29,6 +30,7 @@ class HeroRepositoryImpl @Inject constructor(
     private val heroRemoteSource: HeroRemoteSource,
     private val heroLocalSource: HeroLocalSource,
 ) : HeroRepository {
+
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun getHeroes(): Flow<List<Hero>>  {
         return heroLocalSource.isHeroDataStored().flatMapLatest { isHeroDataStored ->
@@ -36,7 +38,7 @@ class HeroRepositoryImpl @Inject constructor(
                 {
                    val heroList = heroRemoteSource.getHeroes()
                    heroLocalSource.storeHeroes(heroList)
-                   flowOf()
+                   flowOf(heroList)
                  } else {
 
                     heroLocalSource.getHeroes()
@@ -44,5 +46,8 @@ class HeroRepositoryImpl @Inject constructor(
             }
         }
     }
+
+
+
 
 }

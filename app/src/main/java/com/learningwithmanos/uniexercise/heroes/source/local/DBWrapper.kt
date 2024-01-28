@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.map
 interface DBWrapper {
     suspend fun isHeroDataStored(): Flow<Boolean>
     suspend fun storeHeroes(heroes: List<Hero>)
+    suspend fun deleteHeroes()
     fun getHeroes(): Flow<List<Hero>>
 }
 
@@ -39,6 +40,14 @@ class DummyDBWrapper @Inject constructor(private val marvelDao : MarvelDao) : DB
         Log.d("Testing", "Topiki vasi")
         return herolist
     }
+
+    override suspend fun deleteHeroes() {
+        marvelDao.deleteAllHeroes()
+    }
+
+
+
+
 }
 
 
