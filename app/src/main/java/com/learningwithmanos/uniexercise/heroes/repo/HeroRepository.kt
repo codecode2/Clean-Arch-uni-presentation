@@ -30,7 +30,6 @@ interface HeroRepository {
 class HeroRepositoryImpl @Inject constructor(
     private val heroRemoteSource: HeroRemoteSource,
     private val heroLocalSource: HeroLocalSource,
-    private val marvelDao: MarvelDao
 ) : HeroRepository {
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun getHeroes(): Flow<List<Hero>>  {
