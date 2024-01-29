@@ -47,7 +47,4 @@ class HeroRepositoryImpl @Inject constructor(
         }
     }
 
-
-
-
 }

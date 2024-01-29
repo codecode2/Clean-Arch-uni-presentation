@@ -74,10 +74,15 @@ class HeroRepositoryImplTest {
             // then
             assertThat(actualHeroes, equalTo(dummyHeroData))
             verifyNoMoreInteractions(heroRemoteSourceMock)
+
             verify(heroLocalSourceMock).isHeroDataStored()
             verify(heroLocalSourceMock).getHeroes()
         }
 
     }
+
+
+
+
 
 }
