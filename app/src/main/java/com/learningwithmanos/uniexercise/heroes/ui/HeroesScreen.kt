@@ -11,9 +11,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -26,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.learningwithmanos.uniexercise.heroes.data.Tab
 
@@ -35,24 +37,24 @@ import com.learningwithmanos.uniexercise.heroes.data.Tab
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HeroesScreen(
+fun HeroesScreen (
+    navController: NavController,
     viewModel: HeroesViewModel = hiltViewModel()
+
 ) {
+
     val selectedTab = viewModel.selectedTabStateFlow.collectAsState()
     val heroesList = viewModel.heroesStateFlow.collectAsState()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Heroes") },
-                navigationIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Build,
-                        contentDescription = "Menu",
-                        modifier = Modifier.clickable { /* Handle navigation icon click */ }
-                    )
+                title = { Text("Marvel") },
+                actions = {
+                    IconButton(onClick = { navController.navigate("keysInputScreen") }) {
+                        Icon(Icons.Filled.Settings, contentDescription = "Settings")
+                    }
                 }
-
             )
         }
     ) { innerPadding ->
