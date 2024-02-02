@@ -33,18 +33,24 @@ class HeroRepositoryImpl @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun getHeroes(): Flow<List<Hero>>  {
+    heroLocalSource.deleteAllHeroes()
         return heroLocalSource.isHeroDataStored().flatMapLatest { isHeroDataStored ->
-             if (!isHeroDataStored)
-                {
-                   val heroList = heroRemoteSource.getHeroes()
-                   heroLocalSource.storeHeroes(heroList)
-                   flowOf(heroList)
-                 } else {
-
+            try {
+                if (!isHeroDataStored) {
+                    val heroList = heroRemoteSource.getHeroes()
+                    heroLocalSource.storeHeroes(heroList)
+                    flowOf(heroList)
+                } else {
                     heroLocalSource.getHeroes()
-
+                }
+            } catch (e: Exception) {
+                // Handle the exception here
+                println("An error occurred: ${e.message}")
+                flowOf(emptyList())
             }
         }
+
+
+    }
     }
 
-}

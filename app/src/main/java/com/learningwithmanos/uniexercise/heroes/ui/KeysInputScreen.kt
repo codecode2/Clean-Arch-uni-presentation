@@ -1,6 +1,6 @@
 package com.learningwithmanos.uniexercise.heroes.presenatation.ui.screens
 
-import androidx.compose.foundation.clickable
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,11 +24,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 
 import com.learningwithmanos.uniexercise.heroes.presenatation.viewmodels.KeysViewModel
+import com.learningwithmanos.uniexercise.heroes.ui.MyPreferences
+import com.learningwithmanos.uniexercise.heroes.utils.Constants
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,6 +42,12 @@ fun KeysInputScreen(
     viewModel: KeysViewModel = hiltViewModel()
 ) {
 
+    val context = LocalContext.current // Get the current context
+    val myPreferences = MyPreferences(context) // Create an instance of MyPreferences
+    val publicKeyInput = myPreferences.getPublicKey()
+    val privateKeyInput = myPreferences.getPrivateKey()
+    // Use the savePublicKey method of MyPreferences
+    // Replace "yourPublicKey" with the actual public key you want to save
 
 
 
@@ -61,7 +70,7 @@ fun KeysInputScreen(
                 .padding(innerPadding)
         ) {
 
-            var publicKey by remember { mutableStateOf("") }
+            var publicKey by remember { mutableStateOf("$publicKeyInput") }
 
             OutlinedTextField(
                 value = publicKey,
@@ -76,7 +85,7 @@ fun KeysInputScreen(
             Spacer(modifier = Modifier.height(4.dp))
 
 
-            var privateKey by remember { mutableStateOf("") }
+            var privateKey by remember { mutableStateOf("$privateKeyInput") }
 
             OutlinedTextField(
                 value = privateKey,
@@ -92,8 +101,17 @@ fun KeysInputScreen(
             Button(
                 onClick = {
                     // Do something with the inputText
-                    println("Input Text: $publicKey")
-                    println("Input Text: $privateKey")
+
+
+                    myPreferences.savePublicKey("$publicKey")
+                    myPreferences.savePrivateKey("$privateKey")
+
+                    val publicKey = myPreferences.getPublicKey()
+                    val privateKey = myPreferences.getPrivateKey()
+                    if (publicKey != null && privateKey != null) {
+                        val hash = Constants.hash()
+
+                    }
 
                     navController.popBackStack()
                 },

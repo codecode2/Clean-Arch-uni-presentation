@@ -1,5 +1,8 @@
 package com.learningwithmanos.uniexercise.heroes.di
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.learningwithmanos.uniexercise.heroes.api.MarvelApi
 import com.learningwithmanos.uniexercise.heroes.repo.HeroRepository
 import com.learningwithmanos.uniexercise.heroes.repo.HeroRepositoryImpl
@@ -21,6 +24,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -91,7 +95,6 @@ interface HeroesModule {
 
 object  networkModule
 {
-
     //Retrofit
 
     @Provides
@@ -103,13 +106,29 @@ object  networkModule
             .build()
     }
 
-
-
     @Provides
     @Singleton
     fun provideMarvelApiService(retrofit: Retrofit): MarvelApi {
         return retrofit.create(MarvelApi::class.java)
     }
+
+
+
+
+
+
+
+    @Module
+    @InstallIn(SingletonComponent::class)
+        object SharedPreferencesModule {
+            @Provides
+            fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+                return context.getSharedPreferences("publicKey", Context.MODE_PRIVATE)
+            }
+        }
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 package com.learningwithmanos.uniexercise.heroes.ui
 
+import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,12 +42,12 @@ import com.learningwithmanos.uniexercise.heroes.data.Tab
 fun HeroesScreen (
     navController: NavController,
     viewModel: HeroesViewModel = hiltViewModel()
-
 ) {
+
+
 
     val selectedTab = viewModel.selectedTabStateFlow.collectAsState()
     val heroesList = viewModel.heroesStateFlow.collectAsState()
-
     Scaffold(
         topBar = {
             TopAppBar(
