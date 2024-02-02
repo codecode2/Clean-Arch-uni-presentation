@@ -33,7 +33,6 @@ class HeroRepositoryImpl @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun getHeroes(): Flow<List<Hero>>  {
-    heroLocalSource.deleteAllHeroes()
         return heroLocalSource.isHeroDataStored().flatMapLatest { isHeroDataStored ->
             try {
                 if (!isHeroDataStored) {
