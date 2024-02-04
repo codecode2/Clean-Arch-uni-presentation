@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.ui
+package com.learningwithmanos.uniexercise.heroes.utils
 
 import android.content.Context
 

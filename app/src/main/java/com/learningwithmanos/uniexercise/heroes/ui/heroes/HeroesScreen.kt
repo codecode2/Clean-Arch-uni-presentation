@@ -1,6 +1,5 @@
-package com.learningwithmanos.uniexercise.heroes.ui
+package com.learningwithmanos.uniexercise.heroes.ui.heroes
 
-import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -32,9 +30,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.learningwithmanos.uniexercise.heroes.data.Tab
-
-
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)

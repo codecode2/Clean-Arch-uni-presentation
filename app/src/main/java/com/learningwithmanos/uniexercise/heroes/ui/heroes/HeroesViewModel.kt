@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.ui
+package com.learningwithmanos.uniexercise.heroes.ui.heroes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

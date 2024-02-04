@@ -1,6 +1,5 @@
 package com.learningwithmanos.uniexercise.heroes.presenatation.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 
-import com.learningwithmanos.uniexercise.heroes.presenatation.viewmodels.KeysViewModel
-import com.learningwithmanos.uniexercise.heroes.ui.MyPreferences
+import com.learningwithmanos.uniexercise.heroes.ui.keys.KeysViewModel
+import com.learningwithmanos.uniexercise.heroes.utils.MyPreferences
 import com.learningwithmanos.uniexercise.heroes.utils.Constants
 
 

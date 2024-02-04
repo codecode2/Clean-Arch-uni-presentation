@@ -15,7 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 import com.learningwithmanos.uniexercise.heroes.presenatation.ui.screens.KeysInputScreen
-import com.learningwithmanos.uniexercise.heroes.ui.HeroesScreen
+import com.learningwithmanos.uniexercise.heroes.ui.heroes.HeroesScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @AndroidEntryPoint

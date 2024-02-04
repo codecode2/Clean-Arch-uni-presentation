@@ -1,7 +1,7 @@
 package com.learningwithmanos.uniexercise
 
 import android.app.Application
-import com.learningwithmanos.uniexercise.heroes.ui.MyPreferences
+import com.learningwithmanos.uniexercise.heroes.utils.MyPreferences
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

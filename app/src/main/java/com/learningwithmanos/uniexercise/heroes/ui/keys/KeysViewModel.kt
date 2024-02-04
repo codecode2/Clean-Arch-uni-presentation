@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.presenatation.viewmodels
+package com.learningwithmanos.uniexercise.heroes.ui.keys
 
 
 import android.content.SharedPreferences

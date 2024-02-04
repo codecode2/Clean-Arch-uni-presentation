@@ -3,7 +3,6 @@ package com.learningwithmanos.uniexercise.heroes.utils
 
 
 import com.learningwithmanos.uniexercise.MyApplication
-import com.learningwithmanos.uniexercise.heroes.ui.MyPreferences
 import java.math.BigInteger
 import java.security.MessageDigest
 
