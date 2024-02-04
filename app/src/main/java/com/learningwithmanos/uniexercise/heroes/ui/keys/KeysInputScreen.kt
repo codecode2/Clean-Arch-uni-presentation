@@ -1,5 +1,6 @@
 package com.learningwithmanos.uniexercise.heroes.presenatation.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,10 +27,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.learningwithmanos.uniexercise.MyApplication
+import com.learningwithmanos.uniexercise.heroes.source.local.DBWrapper
+import com.learningwithmanos.uniexercise.heroes.source.local.DummyDBWrapper
+import com.learningwithmanos.uniexercise.heroes.source.local.database.MarvelDao
+import com.learningwithmanos.uniexercise.heroes.source.remote.RestFrameworkWrapper
 
 import com.learningwithmanos.uniexercise.heroes.ui.keys.KeysViewModel
 import com.learningwithmanos.uniexercise.heroes.utils.MyPreferences
 import com.learningwithmanos.uniexercise.heroes.utils.Constants
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,8 +53,8 @@ fun KeysInputScreen(
     val myPreferences = MyPreferences(context) // Create an instance of MyPreferences
     val publicKeyInput = myPreferences.getPublicKey()
     val privateKeyInput = myPreferences.getPrivateKey()
-    // Use the savePublicKey method of MyPreferences
-    // Replace "yourPublicKey" with the actual public key you want to save
+    val dbWrapper: DBWrapper = DummyDBWrapper(viewModel.marvelDao)
+
 
 
 
@@ -98,24 +107,30 @@ fun KeysInputScreen(
 
             Button(
                 onClick = {
-                    // Do something with the inputText
+                    val publicKeyStored =  MyApplication.preferences.getPublicKey()
+                    val privateKeyStored =  MyApplication.preferences.getPrivateKey()
 
+                    if(publicKey.toString() != publicKeyStored.toString() || privateKey.toString() != privateKeyStored.toString()) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            dbWrapper.deleteHeroes()
+                        }
+                    }
 
                     myPreferences.savePublicKey("$publicKey")
                     myPreferences.savePrivateKey("$privateKey")
 
-                    val publicKey = myPreferences.getPublicKey()
-                    val privateKey = myPreferences.getPrivateKey()
-                    if (publicKey != null && privateKey != null) {
-                        val hash = Constants.hash()
+                    if (publicKey==publicKeyInput){}
 
+                    if (publicKey !="" && privateKey !="") {
+                        Constants.hash()
                     }
 
                     navController.popBackStack()
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                enabled = publicKey.isNotEmpty() && privateKey.isNotEmpty() // Disable the button if publicKey or privateKey is empty
             ) {
-                Text("Save Keys")
+                Text("Save")
             }
         }
     }

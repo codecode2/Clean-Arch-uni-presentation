@@ -14,13 +14,16 @@ class Constants {
         val timeStamp = System.currentTimeMillis()
         val limit = 20
         val offset = 0
+        var PUBLIC_KEY = MyApplication.preferences.getPublicKey()
+        var PRIVATE_KEY = MyApplication.preferences.getPrivateKey()
 
 
         fun hash(): String {
-            val PUBLIC_KEY = MyApplication.preferences.getPublicKey()
-            val PRIVATE_KEY = MyApplication.preferences.getPrivateKey()
+              PUBLIC_KEY = MyApplication.preferences.getPublicKey()
+              PRIVATE_KEY = MyApplication.preferences.getPrivateKey()
 
-
+            //a9dbf8017fb93f3ed7c2d8c44aeb4ef9
+           // 7e9f55c459bb0e0c78e17a72fc922d1e38c4d53f
 
             if (PUBLIC_KEY != null && PRIVATE_KEY != null) {
                 val input = "$timeStamp$PRIVATE_KEY$PUBLIC_KEY"

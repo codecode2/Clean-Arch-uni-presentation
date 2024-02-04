@@ -19,6 +19,22 @@ class MyPreferences(context: Context)  {
     }
 
 
+    fun saveOldPublicKey(oldPublicKey: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("oldPublicKey", oldPublicKey)
+        editor.apply()
+    }
+
+    fun saveoldPrivateKey(oldPrivateKey: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("oldPrivateKey", oldPrivateKey)
+        editor.apply()
+    }
+
+
+
+
+
     fun getPublicKey(): String? {
         return sharedPreferences.getString("publicKey", null)
     }
@@ -26,5 +42,15 @@ class MyPreferences(context: Context)  {
     fun getPrivateKey(): String? {
         return sharedPreferences.getString("privateKey", null)
     }
+
+
+    fun checkIfHasChanged(publicKey: String,privateKey: String)
+    {
+
+
+
+    }
+
+
 
 }

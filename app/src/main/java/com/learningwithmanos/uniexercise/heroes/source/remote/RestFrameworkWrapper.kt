@@ -17,7 +17,7 @@ class DummyRestFrameworkWrapper @Inject constructor(
 ): RestFrameworkWrapper {
     override suspend fun getHeroes(): List<Hero> {
         val PUBLIC_KEY = MyApplication.preferences.getPublicKey()
-        val PRIVATE_KEY = MyApplication.preferences.getPrivateKey()
+
 
         val response = marvelApi.getAllCharacters(
             apiKey = PUBLIC_KEY,
@@ -29,10 +29,7 @@ class DummyRestFrameworkWrapper @Inject constructor(
 
         if (response.isSuccessful) {
 
-            val key= PUBLIC_KEY
-            val key2= PRIVATE_KEY
-            Log.d("PUBLICKEY", "$key")
-            Log.d("PRIVATEKEY", "$key2")
+
             Log.d("Testing", "remote call again")
             return response.body()?.data?.results?.map { marvelCharacter ->
                 Hero(
