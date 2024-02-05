@@ -2,7 +2,6 @@ package com.learningwithmanos.uniexercise.heroes.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import com.learningwithmanos.uniexercise.heroes.api.MarvelApi
 import com.learningwithmanos.uniexercise.heroes.repo.HeroRepository
 import com.learningwithmanos.uniexercise.heroes.repo.HeroRepositoryImpl
@@ -20,6 +19,7 @@ import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByNameUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByNameUCImpl
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesUCImpl
+import com.learningwithmanos.uniexercise.heroes.utils.MyPreferences
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -89,11 +89,12 @@ interface HeroesModule {
 
 
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 
 
-object  networkModule
+object  NetworkModule
 {
     //Retrofit
 
@@ -125,7 +126,15 @@ object  networkModule
             fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
                 return context.getSharedPreferences("publicKey", Context.MODE_PRIVATE)
             }
+
+        @Provides
+        fun provideMyPreferences(@ApplicationContext context: Context): MyPreferences {
+            return MyPreferences(context)
         }
+        }
+
+
+
 
 
 

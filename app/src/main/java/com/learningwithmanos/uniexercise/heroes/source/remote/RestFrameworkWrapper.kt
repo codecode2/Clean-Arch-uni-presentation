@@ -5,6 +5,7 @@ import com.learningwithmanos.uniexercise.MyApplication
 import com.learningwithmanos.uniexercise.heroes.api.MarvelApi
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import com.learningwithmanos.uniexercise.heroes.utils.Constants
+import com.learningwithmanos.uniexercise.heroes.utils.MyPreferences
 import javax.inject.Inject
 
 interface RestFrameworkWrapper{
@@ -12,7 +13,8 @@ interface RestFrameworkWrapper{
 }
 
 class DummyRestFrameworkWrapper @Inject constructor(
-    private val marvelApi: MarvelApi
+    private val marvelApi: MarvelApi,
+    private val myPreferences: MyPreferences
 
 ): RestFrameworkWrapper {
     override suspend fun getHeroes(): List<Hero> {

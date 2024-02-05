@@ -3,8 +3,10 @@ package com.learningwithmanos.uniexercise.heroes.utils
 import android.content.Context
 
 
-class MyPreferences(context: Context)  {
-    private val sharedPreferences = context.getSharedPreferences("mySharedPreferences", Context.MODE_PRIVATE)
+class MyPreferences(context: Context) {
+    private val sharedPreferences =
+        context.getSharedPreferences("mySharedPreferences", Context.MODE_PRIVATE)
+
 
     fun savePublicKey(publicKey: String) {
         val editor = sharedPreferences.edit()
@@ -33,8 +35,6 @@ class MyPreferences(context: Context)  {
 
 
 
-
-
     fun getPublicKey(): String? {
         return sharedPreferences.getString("publicKey", null)
     }
@@ -43,13 +43,28 @@ class MyPreferences(context: Context)  {
         return sharedPreferences.getString("privateKey", null)
     }
 
+    fun getErrorMessage(): String? {
+        return sharedPreferences.getString("errorMessage", null)
+    }
 
-    fun checkIfHasChanged(publicKey: String,privateKey: String)
+
+    fun makeErrorMessageNull ()
     {
 
-
+        val editor = sharedPreferences.edit()
+        editor.putString("errorMessage",null)
+        editor.apply()
 
     }
+
+    fun saveErrorMessage(message: String?) {
+        val editor = sharedPreferences.edit()
+        editor.putString("errorMessage", message)
+        editor.apply()
+    }
+
+
+
 
 
 

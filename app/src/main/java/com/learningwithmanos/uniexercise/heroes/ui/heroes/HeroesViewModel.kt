@@ -1,7 +1,9 @@
 package com.learningwithmanos.uniexercise.heroes.ui.heroes
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.learningwithmanos.uniexercise.MyApplication
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import com.learningwithmanos.uniexercise.heroes.data.Tab
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByHighestNumberOfComicsUC
@@ -12,6 +14,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -21,8 +24,17 @@ import javax.inject.Inject
 class HeroesViewModel @Inject constructor(
     private val getHeroesUC: GetHeroesUC,
     private val getHeroesSortedByNameUC: GetHeroesSortedByNameUC,
-    private val getHeroesSortedByHighestNumberOfComicsUC: GetHeroesSortedByHighestNumberOfComicsUC
+    private val getHeroesSortedByHighestNumberOfComicsUC: GetHeroesSortedByHighestNumberOfComicsUC,
+
+
 ) : ViewModel() {
+
+    fun makeErrorMessageNull ()
+    {
+        MyApplication.preferences.makeErrorMessageNull()
+    }
+
+
 
     private var _selectedTabStateFlow: MutableStateFlow<Tab> = MutableStateFlow(Tab.Heroes)
 
@@ -42,6 +54,9 @@ class HeroesViewModel @Inject constructor(
             Tab.SortedByComicHeroes -> getHeroesSortedByHighestNumberOfComicsUC.execute()
                 .map { list -> list.map { it.mapHeroToHeroTileModel() }}
         }
+    }.catch {e->
+
+        Log.e("HeroesViewModel", "Error getting heroes: ${e.message}")
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(),
@@ -68,6 +83,10 @@ class HeroesViewModel @Inject constructor(
     }
 
 }
+
+
+
+
 
 data class HeroTileModel(
     val title: String,
