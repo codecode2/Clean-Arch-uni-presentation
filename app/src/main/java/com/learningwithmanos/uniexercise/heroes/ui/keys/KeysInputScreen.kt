@@ -1,7 +1,7 @@
 package com.learningwithmanos.uniexercise.heroes.ui.keys
 
 import android.annotation.SuppressLint
-import android.widget.Toast
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,15 +33,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.learningwithmanos.uniexercise.MyApplication
-import com.learningwithmanos.uniexercise.heroes.source.local.DBWrapper
-import com.learningwithmanos.uniexercise.heroes.source.local.DummyDBWrapper
 import com.learningwithmanos.uniexercise.heroes.utils.sharedpreferences.MyPreferences
-import com.learningwithmanos.uniexercise.heroes.utils.constants.Constants
 import com.learningwithmanos.uniexercise.heroes.vm.keys.KeysViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @SuppressLint("CoroutineCreationDuringComposition")
@@ -53,13 +49,15 @@ fun KeysInputScreen(
     viewModel: KeysViewModel = hiltViewModel()
 ) {
 
-    val context = LocalContext.current // Get the current context
-    val myPreferences = MyPreferences(context) // Create an instance of MyPreferences
-    val publicKeyInput = myPreferences.getPublicKey()
-    val privateKeyInput = myPreferences.getPrivateKey()
-    val dbWrapper: DBWrapper = DummyDBWrapper(viewModel.marvelDao)
+
+    val publicKeyInput = viewModel.getPublicKey()
+    val privateKeyInput = viewModel.getPrivateKey()
+
     var publicKey by remember { mutableStateOf("$publicKeyInput") }
     var privateKey by remember { mutableStateOf("$privateKeyInput") }
+
+    Log.d("VIEW MODEL", "$publicKey with $publicKeyInput  $privateKeyInput $privateKey")
+
 
     Scaffold(
         topBar = {
@@ -79,12 +77,8 @@ fun KeysInputScreen(
                 },
                 actions = {
                     IconButton(onClick = {
-                        myPreferences.savePublicKey("")
-                        myPreferences.savePrivateKey("")
+                        viewModel.saveApiKeys("","")
                         CoroutineScope(Dispatchers.IO).launch {
-                            dbWrapper.deleteHeroes()
-
-
                             publicKey =""
                             privateKey=""
                         }
@@ -92,10 +86,9 @@ fun KeysInputScreen(
                     }) {
                         Icon(Icons.Filled.Delete, contentDescription = "Localized description")
 
-
-
-
                     }
+
+
                 }
             )
         }
@@ -136,29 +129,15 @@ fun KeysInputScreen(
 
             Spacer(modifier = Modifier.height(6.dp))
 
+
+
+
+
             Button(
                 onClick = {
 
-
-                    val publicKeyStored =  MyApplication.preferences.getPublicKey()
-                    val privateKeyStored =  MyApplication.preferences.getPrivateKey()
-
-                    if(publicKey != publicKeyStored || privateKey != privateKeyStored) {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            dbWrapper.deleteHeroes()
-                        }
-                    }
-
-
-                    myPreferences.savePublicKey("$publicKey")
-                    myPreferences.savePrivateKey("$privateKey")
-
-
-                    if (publicKey !="" && privateKey !="") {
-                        Constants.hash()
-                    }
-
-
+                    viewModel.saveApiKeys(publicKey,privateKey)
+                    viewModel.ifTheKeysChanged(publicKey,privateKey)
 
                     navController.popBackStack()
                 },

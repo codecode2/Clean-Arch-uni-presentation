@@ -34,6 +34,14 @@ class MyPreferences(context: Context) {
     }
 
 
+    fun getOldPublicKey(): String? {
+        return sharedPreferences.getString("oldPublicKey", null)
+    }
+
+    fun getOldPrivateKey(): String? {
+        return sharedPreferences.getString("oldPrivateKey", null)
+    }
+
 
     fun getPublicKey(): String? {
         return sharedPreferences.getString("publicKey", null)
@@ -43,14 +51,15 @@ class MyPreferences(context: Context) {
         return sharedPreferences.getString("privateKey", null)
     }
 
+
     fun getErrorMessage(): String? {
         return sharedPreferences.getString("errorMessage", null)
     }
 
 
+
     fun makeErrorMessageNull ()
     {
-
         val editor = sharedPreferences.edit()
         editor.putString("errorMessage",null)
         editor.apply()

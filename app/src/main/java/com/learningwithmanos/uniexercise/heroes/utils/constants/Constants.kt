@@ -2,10 +2,12 @@ package com.learningwithmanos.uniexercise.heroes.utils.constants
 
 
 
+import android.util.Log
 import com.learningwithmanos.uniexercise.MyApplication
 import java.math.BigInteger
 import java.security.MessageDigest
-
+import com.learningwithmanos.uniexercise.heroes.repo.UserKeysRepository
+import kotlinx.coroutines.runBlocking
 
 class Constants {
 
@@ -14,13 +16,18 @@ class Constants {
         val timeStamp = System.currentTimeMillis()
         const val limit = 20
 
-        private var  PUBLIC_KEY = MyApplication.preferences.getPublicKey()
-        private var PRIVATE_KEY = MyApplication.preferences.getPrivateKey()
+       var PUBLIC_KEY = MyApplication.preferences.getPublicKey()
+       var PRIVATE_KEY =  MyApplication.preferences.getOldPrivateKey()
 
 
         fun hash(): String {
-              PUBLIC_KEY = MyApplication.preferences.getPublicKey()
-              PRIVATE_KEY = MyApplication.preferences.getPrivateKey()
+
+            runBlocking {
+                PUBLIC_KEY = MyApplication.preferences.getPublicKey()
+                PRIVATE_KEY =  MyApplication.preferences.getOldPrivateKey()
+            }
+
+
 
             //a9dbf8017fb93f3ed7c2d8c44aeb4ef9
            //7e9f55c459bb0e0c78e17a72fc922d1e38c4d53f

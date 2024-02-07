@@ -11,6 +11,7 @@ import javax.inject.Inject
  */
 interface GetHeroesSortedByHighestNumberOfComicsUC {
     suspend fun execute(): Flow<List<Hero>>
+
 }
 
 class GetHeroesSortedByHighestNumberOfComicsUCImpl @Inject constructor(
@@ -19,4 +20,6 @@ class GetHeroesSortedByHighestNumberOfComicsUCImpl @Inject constructor(
     override suspend fun execute(): Flow<List<Hero>> {
         return heroRepository.getHeroes().map { list -> list.sortedByDescending { it.availableComics } }
     }
+
+
 }

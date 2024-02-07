@@ -14,7 +14,7 @@ interface RestFrameworkWrapper{
 
 class DummyRestFrameworkWrapper @Inject constructor(
     private val marvelApi: MarvelApi,
-    private val myPreferences: MyPreferences
+
 
 ): RestFrameworkWrapper {
     override suspend fun getHeroes(): List<Hero> {
@@ -32,7 +32,7 @@ class DummyRestFrameworkWrapper @Inject constructor(
         if (response.isSuccessful) {
 
 
-            Log.d("Testing", "remote call again")
+            Log.d("Testing", "remote call ")
             return response.body()?.data?.results?.map { marvelCharacter ->
                 Hero(
                     id = marvelCharacter.id,

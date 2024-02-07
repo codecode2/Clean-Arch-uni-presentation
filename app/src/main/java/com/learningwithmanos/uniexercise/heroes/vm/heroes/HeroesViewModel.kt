@@ -29,10 +29,6 @@ class HeroesViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    fun makeErrorMessageNull ()
-    {
-        MyApplication.preferences.makeErrorMessageNull()
-    }
 
 
 

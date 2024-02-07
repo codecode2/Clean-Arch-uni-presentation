@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import com.learningwithmanos.uniexercise.heroes.api.request.MarvelApi
 import com.learningwithmanos.uniexercise.heroes.repo.HeroRepository
 import com.learningwithmanos.uniexercise.heroes.repo.HeroRepositoryImpl
+import com.learningwithmanos.uniexercise.heroes.repo.UserKeysRepository
+import com.learningwithmanos.uniexercise.heroes.repo.UserKeysRepositoryImpl
 import com.learningwithmanos.uniexercise.heroes.source.local.DBWrapper
 import com.learningwithmanos.uniexercise.heroes.source.local.DummyDBWrapper
 import com.learningwithmanos.uniexercise.heroes.source.local.HeroLocalSource
@@ -19,6 +21,12 @@ import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByNameUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByNameUCImpl
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesUCImpl
+import com.learningwithmanos.uniexercise.heroes.usecase.GetUserApiKeys
+import com.learningwithmanos.uniexercise.heroes.usecase.GetUserApiKeysImpl
+import com.learningwithmanos.uniexercise.heroes.usecase.KeysChanged
+import com.learningwithmanos.uniexercise.heroes.usecase.KeysChangedImpl
+import com.learningwithmanos.uniexercise.heroes.usecase.SaveUserApiKeys
+import com.learningwithmanos.uniexercise.heroes.usecase.SaveUserApiKeysImpl
 import com.learningwithmanos.uniexercise.heroes.utils.sharedpreferences.MyPreferences
 import dagger.Binds
 import dagger.Module
@@ -85,7 +93,36 @@ interface HeroesModule {
     fun bindsDBWrapper(
         dummyDBWrapper: DummyDBWrapper
     ): DBWrapper
+
+    @Binds
+    @Singleton
+    abstract fun bindSaveUserApiKeys(
+        saveUserApiKeysImpl: SaveUserApiKeysImpl
+    ): SaveUserApiKeys
+
+    @Binds
+    @Singleton
+    fun bindsUserKeysRepository(
+        userKeysRepositoryImpl: UserKeysRepositoryImpl
+    ): UserKeysRepository
+
+    @Binds
+    @Singleton
+    fun bindsKeysChanged(
+        keysChangedImpl: KeysChangedImpl
+    ): KeysChanged
+
+    @Binds
+    @Singleton
+    fun bindsGetUserApiKeys(
+        GetUserApiKeysImpl: GetUserApiKeysImpl
+    ):  GetUserApiKeys
+
+
+
 }
+
+
 
 
 
@@ -130,18 +167,16 @@ object  NetworkModule
         @Provides
         fun provideMyPreferences(@ApplicationContext context: Context): MyPreferences {
             return MyPreferences(context)
+            }
+
+        @Provides
+        fun provideUserKeysRepository(myPreferences: MyPreferences): UserKeysRepositoryImpl {
+            return UserKeysRepositoryImpl(myPreferences)
         }
+
+
+
         }
-
-
-
-
-
-
-
-
-
-
 
 }
 
