@@ -33,7 +33,8 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.learningwithmanos.uniexercise.MyApplication
 import com.learningwithmanos.uniexercise.heroes.data.Tab
-
+import com.learningwithmanos.uniexercise.heroes.vm.heroes.HeroTileModel
+import com.learningwithmanos.uniexercise.heroes.vm.heroes.HeroesViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)

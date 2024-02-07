@@ -35,8 +35,9 @@ import androidx.navigation.NavController
 import com.learningwithmanos.uniexercise.MyApplication
 import com.learningwithmanos.uniexercise.heroes.source.local.DBWrapper
 import com.learningwithmanos.uniexercise.heroes.source.local.DummyDBWrapper
-import com.learningwithmanos.uniexercise.heroes.utils.MyPreferences
-import com.learningwithmanos.uniexercise.heroes.utils.Constants
+import com.learningwithmanos.uniexercise.heroes.utils.sharedpreferences.MyPreferences
+import com.learningwithmanos.uniexercise.heroes.utils.constants.Constants
+import com.learningwithmanos.uniexercise.heroes.vm.keys.KeysViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,10 +84,7 @@ fun KeysInputScreen(
                         CoroutineScope(Dispatchers.IO).launch {
                             dbWrapper.deleteHeroes()
 
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(context, "\n" +
-                                        "Τhe keys were deleted", Toast.LENGTH_SHORT).show()
-                            }
+
                             publicKey =""
                             privateKey=""
                         }
@@ -161,7 +159,7 @@ fun KeysInputScreen(
                     }
 
 
-                    Toast.makeText(context, "Keys Saved", Toast.LENGTH_SHORT).show()
+
                     navController.popBackStack()
                 },
                 modifier = Modifier.fillMaxWidth(),

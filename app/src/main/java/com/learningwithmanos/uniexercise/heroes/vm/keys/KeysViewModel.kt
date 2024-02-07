@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.ui.keys
+package com.learningwithmanos.uniexercise.heroes.vm.keys
 
 
 

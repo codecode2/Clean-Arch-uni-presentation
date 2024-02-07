@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.source.remote.apiresults
+package com.learningwithmanos.uniexercise.heroes.api.response
 
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import com.learningwithmanos.uniexercise.heroes.source.remote.data.RHero

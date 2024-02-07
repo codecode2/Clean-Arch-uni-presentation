@@ -1,7 +1,7 @@
 package com.learningwithmanos.uniexercise.heroes.ui
 
 import com.learningwithmanos.uniexercise.heroes.data.Tab
-import com.learningwithmanos.uniexercise.heroes.ui.heroes.HeroesViewModel
+import com.learningwithmanos.uniexercise.heroes.vm.heroes.HeroesViewModel
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByHighestNumberOfComicsUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByNameUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesUC

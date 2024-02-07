@@ -6,10 +6,9 @@ import com.learningwithmanos.uniexercise.MyApplication
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import com.learningwithmanos.uniexercise.heroes.source.local.HeroLocalSource
 import com.learningwithmanos.uniexercise.heroes.source.remote.HeroRemoteSource
-import com.learningwithmanos.uniexercise.heroes.utils.MyPreferences
+import com.learningwithmanos.uniexercise.heroes.utils.sharedpreferences.MyPreferences
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
@@ -58,10 +57,13 @@ class HeroRepositoryImpl @Inject constructor(
 
                 if (!isHeroDataStored) {
                     val heroList = heroRemoteSource.getHeroes()
+                    myPreferences.saveErrorMessage(null)
                     heroLocalSource.storeHeroes(heroList)
                     flowOf(heroList)
                 } else {
+                    myPreferences.saveErrorMessage(null)
                     heroLocalSource.getHeroes()
+
                 }
             } catch (e: Exception) {
 

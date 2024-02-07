@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.ui.heroes
+package com.learningwithmanos.uniexercise.heroes.vm.heroes
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

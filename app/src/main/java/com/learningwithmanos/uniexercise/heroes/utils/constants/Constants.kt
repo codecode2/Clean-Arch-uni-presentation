@@ -1,4 +1,4 @@
-package com.learningwithmanos.uniexercise.heroes.utils
+package com.learningwithmanos.uniexercise.heroes.utils.constants
 
 
 
