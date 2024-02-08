@@ -23,6 +23,7 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,9 +47,15 @@ fun HeroesScreen (
 ) {
 
 
-    val errorMessage = MyApplication.preferences.getErrorMessage()
+
+
     val selectedTab = viewModel.selectedTabStateFlow.collectAsState()
     val heroesList = viewModel.heroesStateFlow.collectAsState()
+
+
+
+
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -60,7 +67,9 @@ fun HeroesScreen (
                 }
             )
         }
-    ) { innerPadding ->
+
+    )
+    { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
             TabRow(selectedTabIndex = viewModel.getSelectedIndex(selectedTab.value)) {
 
@@ -82,10 +91,29 @@ fun HeroesScreen (
 
 
             }
-            if (errorMessage!=null){
+
+
+
+
+
+
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState())
+            ) {
+
+                ShowHeroes(heroes = heroesList.value)
+
+            }
+
+            LaunchedEffect(true) {
+                viewModel.errorHandler()
+            }
+
+            val errorMessage = viewModel.message.toString()
+            if (errorMessage!=""){
 
                 Text(
-                    text = errorMessage.toString(),
+                    text = errorMessage,
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentSize(Alignment.Center),
@@ -96,11 +124,6 @@ fun HeroesScreen (
 
             }
 
-            Column(
-                modifier = Modifier.verticalScroll(rememberScrollState())
-            ) {
-                ShowHeroes(heroes = heroesList.value)
-            }
         }
     }
 
@@ -133,6 +156,8 @@ fun ShowHeroes(heroes: List<HeroTileModel>) {
                 Text(text = hero.title+"")
             }
             Spacer(modifier = Modifier.height(60.dp)) // This adds space between each Row
+
+
         }
     }
 }

@@ -1,17 +1,18 @@
 package com.learningwithmanos.uniexercise.heroes.repo
 
 
-import android.util.Log
+import Resource
 import com.learningwithmanos.uniexercise.MyApplication
 import com.learningwithmanos.uniexercise.heroes.data.Hero
+import com.learningwithmanos.uniexercise.heroes.data.Tab
 import com.learningwithmanos.uniexercise.heroes.source.local.HeroLocalSource
 import com.learningwithmanos.uniexercise.heroes.source.remote.HeroRemoteSource
-import com.learningwithmanos.uniexercise.heroes.usecase.ErrorHandling
-import com.learningwithmanos.uniexercise.heroes.utils.sharedpreferences.MyPreferences
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.onEmpty
 import javax.inject.Inject
 
 
@@ -31,7 +32,7 @@ interface HeroRepository {
      * @return list of heroes
      */
     suspend fun getHeroes(): Flow<List<Hero>>
-
+    suspend fun errorHandlingHeros(): Resource<Unit>
 
 }
 
@@ -40,16 +41,12 @@ class HeroRepositoryImpl @Inject constructor(
     private val heroLocalSource: HeroLocalSource
 ) : HeroRepository {
 
-
+    val publicKey = MyApplication.preferences.getPublicKey()
+    val privateKey = MyApplication.preferences.getPublicKey()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun getHeroes(): Flow<List<Hero>> {
-        val publicKey = MyApplication.preferences.getPublicKey()
-        val privateKey = MyApplication.preferences.getPublicKey()
 
-        if (publicKey == "" || privateKey == "") {
-
-         }
 
         return heroLocalSource.isHeroDataStored().flatMapLatest { isHeroDataStored ->
             try {
@@ -57,18 +54,47 @@ class HeroRepositoryImpl @Inject constructor(
                     val heroList = heroRemoteSource.getHeroes()
                     heroLocalSource.storeHeroes(heroList)
                     flowOf(heroList)
+
                 } else {
                     heroLocalSource.getHeroes()
                 }
             } catch (e: Exception) {
 
-                throw Exception("")
+                throw Exception("Wrong Keys")
             }
         }
     }
 
 
+
+    override suspend fun errorHandlingHeros(): Resource<Unit> {
+        return try {
+            val localHeroes = heroLocalSource.getHeroes()
+            val isHeroDataStored: Boolean = heroLocalSource.isHeroDataStored().first()
+
+            if (publicKey == "" || privateKey == "") {
+                return Resource.Error("Your API keys are empty!")
+            }
+
+            if (!isHeroDataStored) {
+                val heroList = heroRemoteSource.getHeroes()
+                heroLocalSource.storeHeroes(heroList)
+                flowOf(heroList)
+
+            } else {
+                heroLocalSource.getHeroes()
+            }
+
+            Resource.Error("")
+        } catch (e: Exception) {
+            Resource.Error("Your API keys are wrong or expired!")
+        }
+    }
+
 }
+
+
+
 
 
 

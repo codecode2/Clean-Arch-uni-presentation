@@ -22,6 +22,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -77,11 +78,9 @@ fun KeysInputScreen(
                 },
                 actions = {
                     IconButton(onClick = {
-                        viewModel.saveApiKeys("","")
-                        CoroutineScope(Dispatchers.IO).launch {
+                            viewModel.saveApiKeys("","")
                             publicKey =""
                             privateKey=""
-                        }
 
                     }) {
                         Icon(Icons.Filled.Delete, contentDescription = "Localized description")
@@ -107,7 +106,6 @@ fun KeysInputScreen(
                 value = publicKey,
                 onValueChange = { newValue ->
                     publicKey = newValue
-                    viewModel.ifTheKeysChanged(publicKey, privateKey)
                 },
                 label = { Text("Public Key") },
                 modifier = Modifier
@@ -124,7 +122,6 @@ fun KeysInputScreen(
                 value = privateKey,
                 onValueChange = { newValue ->
                     privateKey = newValue
-                    viewModel.ifTheKeysChanged(publicKey, privateKey)
                 },
                 label = { Text("Private Key") },
                 modifier = Modifier
@@ -135,7 +132,8 @@ fun KeysInputScreen(
             Spacer(modifier = Modifier.height(6.dp))
 
 
-            viewModel.saveApiKeys(publicKey,privateKey)
+                viewModel.saveApiKeys(publicKey, privateKey)
+                viewModel.ifTheKeysChanged(publicKey, privateKey)
 
 
             Button(
@@ -143,8 +141,9 @@ fun KeysInputScreen(
 
 
 
+                       navController.navigate("HeroesScreen")
 
-                    navController.popBackStack()
+
                 },
                 modifier = Modifier.fillMaxWidth(),
                 enabled = publicKey.isNotEmpty() && privateKey.isNotEmpty() // Disable the button if publicKey or privateKey is empty

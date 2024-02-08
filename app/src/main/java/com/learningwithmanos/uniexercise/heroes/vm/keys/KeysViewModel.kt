@@ -27,8 +27,11 @@ class KeysViewModel @Inject constructor(
 
         fun saveApiKeys(publicKey:String, privateKey: String)
         {
-
+            runBlocking {
+                launch {
                  saveUserApiKeys.saveUserApiKeys(publicKey,privateKey)
+                }
+                }
 
              }
 

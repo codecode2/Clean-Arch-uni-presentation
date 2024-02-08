@@ -1,11 +1,15 @@
 package com.learningwithmanos.uniexercise.heroes.vm.heroes
 
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import com.learningwithmanos.uniexercise.heroes.data.Tab
 import com.learningwithmanos.uniexercise.heroes.usecase.ErrorHandling
+import com.learningwithmanos.uniexercise.heroes.usecase.ErrorHandlingImpl
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByHighestNumberOfComicsUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByNameUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesUC
@@ -18,6 +22,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,10 +30,14 @@ class HeroesViewModel @Inject constructor(
     private val getHeroesUC: GetHeroesUC,
     private val getHeroesSortedByNameUC: GetHeroesSortedByNameUC,
     private val getHeroesSortedByHighestNumberOfComicsUC: GetHeroesSortedByHighestNumberOfComicsUC,
-    private val errorHandling: ErrorHandling
+    private val ErrorHandlingImpl: ErrorHandlingImpl
 
 ) : ViewModel() {
 
+    var list by mutableStateOf("")
+        private set
+
+    var message by mutableStateOf<String?>(null)
 
 
 
@@ -81,11 +90,22 @@ class HeroesViewModel @Inject constructor(
 
 
 
+    fun errorHandler() {
+        viewModelScope.launch {
+            val result = ErrorHandlingImpl.execute()
+            message = when(result) {
+                is Resource.Success -> ({
+                    Resource.Success("")
+                }).toString()
+                is Resource.Error -> {
+                    result.message.toString()
+                }
 
 
-
-
-
+                else -> ({"else error handler"}).toString()
+            }
+        }
+    }
 
 
 
