@@ -105,13 +105,15 @@ fun KeysInputScreen(
 
             OutlinedTextField(
                 value = publicKey,
-                onValueChange = { newValue -> publicKey = newValue },
+                onValueChange = { newValue ->
+                    publicKey = newValue
+                    viewModel.ifTheKeysChanged(publicKey, privateKey)
+                },
                 label = { Text("Public Key") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
             )
-
 
             Spacer(modifier = Modifier.height(4.dp))
 
@@ -120,7 +122,10 @@ fun KeysInputScreen(
 
             OutlinedTextField(
                 value = privateKey,
-                onValueChange = { newValue -> privateKey = newValue },
+                onValueChange = { newValue ->
+                    privateKey = newValue
+                    viewModel.ifTheKeysChanged(publicKey, privateKey)
+                },
                 label = { Text("Private Key") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -130,14 +135,14 @@ fun KeysInputScreen(
             Spacer(modifier = Modifier.height(6.dp))
 
 
-
+            viewModel.saveApiKeys(publicKey,privateKey)
 
 
             Button(
                 onClick = {
 
-                    viewModel.saveApiKeys(publicKey,privateKey)
-                    viewModel.ifTheKeysChanged(publicKey,privateKey)
+
+
 
                     navController.popBackStack()
                 },

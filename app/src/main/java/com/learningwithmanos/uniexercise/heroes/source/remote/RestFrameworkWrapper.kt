@@ -1,11 +1,9 @@
 package com.learningwithmanos.uniexercise.heroes.source.remote
 
 import android.util.Log
-import com.learningwithmanos.uniexercise.MyApplication
 import com.learningwithmanos.uniexercise.heroes.api.request.MarvelApi
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import com.learningwithmanos.uniexercise.heroes.utils.constants.Constants
-import com.learningwithmanos.uniexercise.heroes.utils.sharedpreferences.MyPreferences
 import javax.inject.Inject
 
 interface RestFrameworkWrapper{
@@ -18,11 +16,11 @@ class DummyRestFrameworkWrapper @Inject constructor(
 
 ): RestFrameworkWrapper {
     override suspend fun getHeroes(): List<Hero> {
-        val PUBLIC_KEY = MyApplication.preferences.getPublicKey()
+
 
 
         val response = marvelApi.getAllCharacters(
-            apiKey = PUBLIC_KEY,
+            apiKey = Constants.PUBLIC_KEY,
             timestamp = Constants.timeStamp,
             hash = Constants.hash(),
             limit = Constants.limit,

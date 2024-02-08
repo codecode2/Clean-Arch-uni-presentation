@@ -15,6 +15,8 @@ import com.learningwithmanos.uniexercise.heroes.source.remote.DummyRestFramework
 import com.learningwithmanos.uniexercise.heroes.source.remote.HeroRemoteSource
 import com.learningwithmanos.uniexercise.heroes.source.remote.HeroRemoteSourceImpl
 import com.learningwithmanos.uniexercise.heroes.source.remote.RestFrameworkWrapper
+import com.learningwithmanos.uniexercise.heroes.usecase.ErrorHandling
+import com.learningwithmanos.uniexercise.heroes.usecase.ErrorHandlingImpl
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByHighestNumberOfComicsUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByHighestNumberOfComicsUCImpl
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByNameUC
@@ -28,6 +30,7 @@ import com.learningwithmanos.uniexercise.heroes.usecase.KeysChangedImpl
 import com.learningwithmanos.uniexercise.heroes.usecase.SaveUserApiKeys
 import com.learningwithmanos.uniexercise.heroes.usecase.SaveUserApiKeysImpl
 import com.learningwithmanos.uniexercise.heroes.utils.sharedpreferences.MyPreferences
+import com.learningwithmanos.uniexercise.heroes.vm.heroes.HeroesViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -119,8 +122,18 @@ interface HeroesModule {
     ):  GetUserApiKeys
 
 
+    @Binds
+    @Singleton
+    fun bindErrorHandling(
+        ErrorHandlingImpl: ErrorHandlingImpl
+    ): ErrorHandling
+
 
 }
+
+
+
+
 
 
 
@@ -131,8 +144,7 @@ interface HeroesModule {
 @InstallIn(SingletonComponent::class)
 
 
-object  NetworkModule
-{
+object  NetworkModule {
     //Retrofit
 
     @Provides
@@ -149,6 +161,9 @@ object  NetworkModule
     fun provideMarvelApiService(retrofit: Retrofit): MarvelApi {
         return retrofit.create(MarvelApi::class.java)
     }
+
+
+}
 
 
 
@@ -176,7 +191,9 @@ object  NetworkModule
 
 
 
+
+
         }
 
-}
+
 

@@ -3,9 +3,9 @@ package com.learningwithmanos.uniexercise.heroes.vm.heroes
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.learningwithmanos.uniexercise.MyApplication
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import com.learningwithmanos.uniexercise.heroes.data.Tab
+import com.learningwithmanos.uniexercise.heroes.usecase.ErrorHandling
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByHighestNumberOfComicsUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesSortedByNameUC
 import com.learningwithmanos.uniexercise.heroes.usecase.GetHeroesUC
@@ -25,9 +25,10 @@ class HeroesViewModel @Inject constructor(
     private val getHeroesUC: GetHeroesUC,
     private val getHeroesSortedByNameUC: GetHeroesSortedByNameUC,
     private val getHeroesSortedByHighestNumberOfComicsUC: GetHeroesSortedByHighestNumberOfComicsUC,
-
+    private val errorHandling: ErrorHandling
 
 ) : ViewModel() {
+
 
 
 
@@ -77,6 +78,16 @@ class HeroesViewModel @Inject constructor(
     fun selectTab(tab: Tab) {
         _selectedTabStateFlow.value = tab
     }
+
+
+
+
+
+
+
+
+
+
 
 }
 

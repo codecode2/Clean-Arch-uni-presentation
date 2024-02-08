@@ -10,7 +10,7 @@ import javax.inject.Inject
  * UC used to retrieve a list of heroes
  */
 interface GetHeroesUC {
-    suspend fun execute(): Flow<List<Hero>>
+   suspend  fun execute(): Flow<List<Hero>>
 }
 
 class GetHeroesUCImpl @Inject constructor(

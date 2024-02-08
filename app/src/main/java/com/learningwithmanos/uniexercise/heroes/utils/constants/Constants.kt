@@ -2,30 +2,35 @@ package com.learningwithmanos.uniexercise.heroes.utils.constants
 
 
 
+
+import android.content.Context
 import android.util.Log
 import com.learningwithmanos.uniexercise.MyApplication
+import com.learningwithmanos.uniexercise.heroes.repo.UserKeysRepository
 import java.math.BigInteger
 import java.security.MessageDigest
-import com.learningwithmanos.uniexercise.heroes.repo.UserKeysRepository
-import kotlinx.coroutines.runBlocking
+import com.learningwithmanos.uniexercise.heroes.repo.UserKeysRepositoryImpl
+import com.learningwithmanos.uniexercise.heroes.utils.sharedpreferences.MyPreferences
 
-class Constants {
+
+class Constants(private val context: Context) {
 
     companion object {
 
         val timeStamp = System.currentTimeMillis()
         const val limit = 20
 
-       var PUBLIC_KEY = MyApplication.preferences.getPublicKey()
-       var PRIVATE_KEY =  MyApplication.preferences.getOldPrivateKey()
+
+
+        var  PUBLIC_KEY = MyApplication.preferences.getPublicKey().toString()
+         var PRIVATE_KEY  = MyApplication.preferences.getPrivateKey().toString()
 
 
         fun hash(): String {
 
-            runBlocking {
-                PUBLIC_KEY = MyApplication.preferences.getPublicKey()
-                PRIVATE_KEY =  MyApplication.preferences.getOldPrivateKey()
-            }
+
+            PUBLIC_KEY  = MyApplication.preferences.getPublicKey().toString()
+            PRIVATE_KEY  =  MyApplication.preferences.getPrivateKey().toString()
 
 
 

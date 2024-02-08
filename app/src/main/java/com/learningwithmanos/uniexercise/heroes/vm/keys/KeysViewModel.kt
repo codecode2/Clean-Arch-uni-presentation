@@ -25,19 +25,17 @@ class KeysViewModel @Inject constructor(
 
 {
 
-    fun saveApiKeys(publicKey:String , privateKey: String)
+        fun saveApiKeys(publicKey:String, privateKey: String)
         {
-         runBlocking {
-             launch {
+
                  saveUserApiKeys.saveUserApiKeys(publicKey,privateKey)
-                }
-              }
+
              }
 
 
     fun ifTheKeysChanged(publicKey:String , privateKey: String)
     {
-        runBlocking {
+       runBlocking {
             launch {
                 keysChanged.checkKeysIfChanged(publicKey,privateKey)
             }
