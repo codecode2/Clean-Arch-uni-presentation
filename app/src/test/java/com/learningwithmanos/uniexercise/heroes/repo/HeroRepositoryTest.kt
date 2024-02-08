@@ -1,8 +1,10 @@
 package com.learningwithmanos.uniexercise.heroes.repo
 
+import android.app.Application
 import com.learningwithmanos.uniexercise.heroes.data.Hero
 import com.learningwithmanos.uniexercise.heroes.source.local.HeroLocalSource
 import com.learningwithmanos.uniexercise.heroes.source.remote.HeroRemoteSource
+import com.learningwithmanos.uniexercise.heroes.utils.sharedpreferences.MyPreferences
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -15,13 +17,23 @@ import org.mockito.BDDMockito.verifyNoMoreInteractions
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 
+
+
+
+
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class HeroRepositoryImplTest {
+
+
+
+
 
     private lateinit var heroRepositoryImpl: HeroRepositoryImpl
 
     private val heroRemoteSourceMock: HeroRemoteSource = mock()
     private val heroLocalSourceMock: HeroLocalSource = mock()
+
 
     private val dummyHeroData = listOf(
         Hero(
@@ -40,9 +52,11 @@ class HeroRepositoryImplTest {
 
     @Before
     fun setUp() {
+
         heroRepositoryImpl = HeroRepositoryImpl(
             heroRemoteSourceMock,
-            heroLocalSourceMock
+            heroLocalSourceMock,
+
         )
     }
 
@@ -80,6 +94,8 @@ class HeroRepositoryImplTest {
         }
 
     }
+
+
 
 
 

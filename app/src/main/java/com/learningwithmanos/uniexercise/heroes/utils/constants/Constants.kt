@@ -37,12 +37,12 @@ class Constants(private val context: Context) {
             //a9dbf8017fb93f3ed7c2d8c44aeb4ef9
            //7e9f55c459bb0e0c78e17a72fc922d1e38c4d53f
 
-            if (PUBLIC_KEY != null && PRIVATE_KEY != null) {
+
                 val input = "$timeStamp$PRIVATE_KEY$PUBLIC_KEY"
                 val md = MessageDigest.getInstance("MD5")
                 return BigInteger(1, md.digest(input.toByteArray())).toString(16)
                     .padStart(32, '0')
-            }
+
             return ""
 
 

@@ -131,9 +131,8 @@ fun KeysInputScreen(
 
             Spacer(modifier = Modifier.height(6.dp))
 
-
-                viewModel.saveApiKeys(publicKey, privateKey)
-                viewModel.ifTheKeysChanged(publicKey, privateKey)
+            viewModel.saveApiKeys(publicKey, privateKey)
+            viewModel.ifTheKeysChanged(publicKey, privateKey)
 
 
             Button(
@@ -150,6 +149,8 @@ fun KeysInputScreen(
             ) {
                 Text("Save")
             }
+
+
         }
     }
 }

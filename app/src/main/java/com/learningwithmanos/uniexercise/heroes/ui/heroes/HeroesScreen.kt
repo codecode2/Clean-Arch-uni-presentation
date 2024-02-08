@@ -135,7 +135,7 @@ fun HeroesScreen (
 
 
 @Composable
-fun ShowHeroes(heroes: List<HeroTileModel>) {
+fun  ShowHeroes(heroes: List<HeroTileModel>) {
     Column {
 
         heroes.forEach { hero ->

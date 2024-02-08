@@ -41,8 +41,8 @@ class HeroRepositoryImpl @Inject constructor(
     private val heroLocalSource: HeroLocalSource
 ) : HeroRepository {
 
-    val publicKey = MyApplication.preferences.getPublicKey()
-    val privateKey = MyApplication.preferences.getPublicKey()
+    var publicKey = MyApplication.preferences.getPublicKey()
+    var privateKey = MyApplication.preferences.getPublicKey()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun getHeroes(): Flow<List<Hero>> {
