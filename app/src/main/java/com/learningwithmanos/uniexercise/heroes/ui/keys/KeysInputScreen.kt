@@ -51,13 +51,19 @@ fun KeysInputScreen(
 ) {
 
 
-    val publicKeyInput = viewModel.getPublicKey()
-    val privateKeyInput = viewModel.getPrivateKey()
+    var publicKeyInput = viewModel.getPublicKey()
+    var privateKeyInput = viewModel.getPrivateKey()
+    if(publicKeyInput==null || privateKeyInput==null)
+    {
+        publicKeyInput=""
+        privateKeyInput=""
+    }
+
 
     var publicKey by remember { mutableStateOf("$publicKeyInput") }
     var privateKey by remember { mutableStateOf("$privateKeyInput") }
 
-    Log.d("VIEW MODEL", "$publicKey with $publicKeyInput  $privateKeyInput $privateKey")
+
 
 
     Scaffold(
@@ -139,7 +145,6 @@ fun KeysInputScreen(
 
 
                     viewModel.saveApiKeys(publicKey, privateKey)
-                    viewModel.ifTheKeysChanged(publicKey, privateKey)
 
                       navController.navigate("heroesScreen")
 
@@ -151,8 +156,9 @@ fun KeysInputScreen(
                 Text("Save")
             }
 
-
             viewModel.ifTheKeysChanged(publicKey, privateKey)
+
+
         }
     }
 }

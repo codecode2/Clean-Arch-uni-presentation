@@ -100,19 +100,11 @@ class HeroesViewModel @Inject constructor(
                 is Resource.Error -> {
                     result.message.toString()
                 }
-
-
-                else -> ({"else error handler"}).toString()
+                else -> ({"Error handler"}).toString()
             }
         }
     }
-
-
-
 }
-
-
-
 
 
 data class HeroTileModel(

@@ -47,13 +47,8 @@ fun HeroesScreen (
 ) {
 
 
-
-
     val selectedTab = viewModel.selectedTabStateFlow.collectAsState()
     val heroesList = viewModel.heroesStateFlow.collectAsState()
-
-
-
 
 
     Scaffold(
@@ -92,22 +87,17 @@ fun HeroesScreen (
 
             }
 
-
-
-
-
-
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState())
             ) {
-
                 ShowHeroes(heroes = heroesList.value)
-
             }
 
-            LaunchedEffect(true) {
+            LaunchedEffect(heroesList.value) {
                 viewModel.errorHandler()
             }
+
+
 
             val errorMessage = viewModel.message.toString()
             if (errorMessage!=""){
@@ -135,29 +125,27 @@ fun HeroesScreen (
 
 
 @Composable
-fun  ShowHeroes(heroes: List<HeroTileModel>) {
+fun ShowHeroes(heroes: List<HeroTileModel>) {
     Column {
-
         heroes.forEach { hero ->
-
-
+            // Row for each hero
             Row(
-
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
             ) {
+                // AsyncImage for hero image
                 AsyncImage(
-
                     model = hero.imageUrl,
                     contentDescription = null,
-                    modifier = Modifier.size(260.dp)// Adjust this value to make the image bigger or smaller
+                    modifier = Modifier.size(260.dp)
                 )
-                Spacer(modifier = Modifier.width(8.dp)) // This adds space between the image and the text
-                Text(text = hero.title+"")
+                Spacer(modifier = Modifier.width(8.dp)) // Spacing between image and text
+                // Text for hero title
+                Text(text = hero.title)
             }
-            Spacer(modifier = Modifier.height(60.dp)) // This adds space between each Row
-
-
+            Spacer(modifier = Modifier.height(60.dp)) // Spacing between each Row
         }
     }
 }
+
+

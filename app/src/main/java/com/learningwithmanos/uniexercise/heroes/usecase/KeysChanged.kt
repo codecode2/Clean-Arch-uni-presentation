@@ -1,7 +1,8 @@
 package com.learningwithmanos.uniexercise.heroes.usecase
 
+
+
 import android.util.Log
-import com.learningwithmanos.uniexercise.heroes.repo.HeroRepository
 import com.learningwithmanos.uniexercise.heroes.repo.UserKeysRepository
 import com.learningwithmanos.uniexercise.heroes.source.local.DBWrapper
 import javax.inject.Inject
@@ -31,12 +32,14 @@ class KeysChangedImpl @Inject constructor(
         if (oldPublicKey==null || oldPrivateKey==null){
 
             userKeysRepository.setOldPublicAndPrivateKey(currentPublicKey,currentPrivateKey)
+
         }
+
         else if(currentPublicKey!=oldPublicKey || currentPrivateKey!= oldPrivateKey)
         {
-
             userKeysRepository.setOldPublicAndPrivateKey(currentPublicKey,currentPrivateKey)
-                dbWrapper.deleteHeroes()
+            dbWrapper.deleteHeroes()
+            Log.e("DELETING HEROES","is empty")
 
         }
     }

@@ -3,17 +3,14 @@ package com.learningwithmanos.uniexercise.heroes.utils.constants
 
 
 
-import android.content.Context
-import android.util.Log
+
 import com.learningwithmanos.uniexercise.MyApplication
-import com.learningwithmanos.uniexercise.heroes.repo.UserKeysRepository
 import java.math.BigInteger
 import java.security.MessageDigest
-import com.learningwithmanos.uniexercise.heroes.repo.UserKeysRepositoryImpl
-import com.learningwithmanos.uniexercise.heroes.utils.sharedpreferences.MyPreferences
 
 
-class Constants(private val context: Context) {
+
+class Constants{
 
     companion object {
 
@@ -22,7 +19,7 @@ class Constants(private val context: Context) {
 
 
 
-        var  PUBLIC_KEY = MyApplication.preferences.getPublicKey().toString()
+         var  PUBLIC_KEY = MyApplication.preferences.getPublicKey().toString()
          var PRIVATE_KEY  = MyApplication.preferences.getPrivateKey().toString()
 
 
@@ -43,7 +40,7 @@ class Constants(private val context: Context) {
                 return BigInteger(1, md.digest(input.toByteArray())).toString(16)
                     .padStart(32, '0')
 
-            return ""
+
 
 
         }
