@@ -69,7 +69,7 @@ class HeroRepositoryImpl @Inject constructor(
 
     override suspend fun errorHandlingHeros(): Resource<Unit> {
         return try {
-            val localHeroes = heroLocalSource.getHeroes()
+
             val isHeroDataStored: Boolean = heroLocalSource.isHeroDataStored().first()
 
             if (publicKey == "" || privateKey == "") {

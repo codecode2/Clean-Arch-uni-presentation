@@ -21,7 +21,6 @@ class DummyDBWrapper @Inject constructor(private val marvelDao : MarvelDao) : DB
     override suspend fun isHeroDataStored(): Flow<Boolean> {
         val heroList = marvelDao.getAllHeroes().firstOrNull() ?: emptyList()
         val heroes = heroList.map { it.mapToHero() }
-        Log.d("Testing", heroes.isNotEmpty().toString())
         return flowOf(heroes.isNotEmpty())
     }
 
@@ -37,7 +36,6 @@ class DummyDBWrapper @Inject constructor(private val marvelDao : MarvelDao) : DB
 
     override fun getHeroes(): Flow<List<Hero>> {
         val herolist = marvelDao.getAllHeroes().map { list-> list.map { it.mapToHero() } }
-        Log.d("Testing", "Topiki vasi")
         return herolist
     }
 

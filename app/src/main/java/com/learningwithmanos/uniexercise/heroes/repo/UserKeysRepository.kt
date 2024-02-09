@@ -8,12 +8,12 @@ import javax.inject.Inject
 
 interface UserKeysRepository {
 
-     fun setPublicAndPrivateKey(publickey : String,privateKey: String)
-     fun setOldPublicAndPrivateKey(publicKey: String,privateKey: String)
-     fun getpublicKey():String
-     fun getPrivateKey():String
-     fun getOldpublicKey():String
-     fun getOldPrivateKey():String
+     fun setPublicAndPrivateKey(publickey : String?,privateKey: String?)
+     fun setOldPublicAndPrivateKey(publicKey: String?,privateKey: String?)
+     fun getpublicKey():String?
+     fun getPrivateKey():String?
+     fun getOldpublicKey():String?
+     fun getOldPrivateKey():String?
 }
 
 
@@ -27,7 +27,7 @@ class UserKeysRepositoryImpl @Inject constructor(
 
 ): UserKeysRepository {
 
-   override  fun setPublicAndPrivateKey(publickey : String, privateKey: String)
+   override  fun setPublicAndPrivateKey(publickey : String?, privateKey: String?)
     {
          setPublicKey(publickey)
          setPrivateKey(privateKey)
@@ -35,7 +35,7 @@ class UserKeysRepositoryImpl @Inject constructor(
     }
 
 
-    override  fun setOldPublicAndPrivateKey(publickey : String, privateKey: String)
+    override  fun setOldPublicAndPrivateKey(publickey : String?, privateKey: String?)
     {
         setOldPublicKey(publickey)
         setOldPrivateKey(privateKey)
@@ -44,22 +44,22 @@ class UserKeysRepositoryImpl @Inject constructor(
 
 
 
-   fun setPublicKey(publickey : String)
+   fun setPublicKey(publickey : String?)
     {
         myPreferences.savePublicKey(publickey)
     }
 
-    fun setPrivateKey(privatekey : String)
+    fun setPrivateKey(privatekey : String?)
      {
          myPreferences.savePrivateKey(privatekey)
      }
 
-    fun setOldPublicKey(oldPublicKey : String)
+    fun setOldPublicKey(oldPublicKey : String?)
     {
         myPreferences.saveOldPublicKey(oldPublicKey)
     }
 
-    fun setOldPrivateKey(privateOldkey : String)
+    fun setOldPrivateKey(privateOldkey : String?)
     {
         myPreferences.saveoldPrivateKey(privateOldkey)
     }
@@ -67,23 +67,23 @@ class UserKeysRepositoryImpl @Inject constructor(
 
 
 
-   override   fun getpublicKey(): String
+   override   fun getpublicKey(): String?
       {
           return myPreferences.getPublicKey().toString()
       }
 
-    override   fun getPrivateKey():String
+    override   fun getPrivateKey():String?
         {
             return   myPreferences.getPrivateKey().toString()
         }
 
 
-    override  fun getOldpublicKey() : String
+    override  fun getOldpublicKey() : String?
     {
         return  myPreferences.getOldPublicKey().toString()
     }
 
-    override  fun getOldPrivateKey():String
+    override  fun getOldPrivateKey():String?
     {
         return  myPreferences.getOldPrivateKey().toString()
     }

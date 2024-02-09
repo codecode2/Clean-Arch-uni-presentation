@@ -131,16 +131,17 @@ fun KeysInputScreen(
 
             Spacer(modifier = Modifier.height(6.dp))
 
-            viewModel.saveApiKeys(publicKey, privateKey)
-            viewModel.ifTheKeysChanged(publicKey, privateKey)
+
 
 
             Button(
                 onClick = {
 
 
+                    viewModel.saveApiKeys(publicKey, privateKey)
+                    viewModel.ifTheKeysChanged(publicKey, privateKey)
 
-                       navController.navigate("HeroesScreen")
+                      navController.navigate("heroesScreen")
 
 
                 },
@@ -151,6 +152,7 @@ fun KeysInputScreen(
             }
 
 
+            viewModel.ifTheKeysChanged(publicKey, privateKey)
         }
     }
 }

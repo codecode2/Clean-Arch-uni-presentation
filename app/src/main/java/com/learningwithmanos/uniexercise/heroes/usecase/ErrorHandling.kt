@@ -20,7 +20,4 @@ interface ErrorHandling  {
       return heroRepository.errorHandlingHeros()
 
   }
-
-
-
 }

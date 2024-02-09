@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 interface KeysChanged
 {
-    suspend fun checkKeysIfChanged(currentPublic:String , currentPrivateKey: String)
+    suspend fun checkKeysIfChanged(currentPublic:String? , currentPrivateKey: String?)
 
 }
 
@@ -19,14 +19,14 @@ class KeysChangedImpl @Inject constructor(
 ): KeysChanged
 
 {
-    override suspend fun checkKeysIfChanged(currentPublic:String , currentPrivateKey: String)
+    override suspend fun checkKeysIfChanged(currentPublic:String? , currentPrivateKey: String?)
     {
-            val currentPublicKey: String = currentPublic
-            val currentPrivateKey: String = currentPrivateKey
-            val oldPublicKey : String = userKeysRepository.getOldpublicKey().toString()
-            val oldPrivateKey: String = userKeysRepository.getOldPrivateKey().toString()
+            val currentPublicKey: String? = currentPublic
+            val currentPrivateKey: String? = currentPrivateKey
+            val oldPublicKey : String? = userKeysRepository.getOldpublicKey().toString()
+            val oldPrivateKey: String? = userKeysRepository.getOldPrivateKey().toString()
 
-        Log.d("CHECK VALUES ", "$oldPublicKey   $oldPrivateKey")
+
 
         if (oldPublicKey==null || oldPrivateKey==null){
 
@@ -39,12 +39,5 @@ class KeysChangedImpl @Inject constructor(
                 dbWrapper.deleteHeroes()
 
         }
-
-
-
-
     }
-
-
-
 }

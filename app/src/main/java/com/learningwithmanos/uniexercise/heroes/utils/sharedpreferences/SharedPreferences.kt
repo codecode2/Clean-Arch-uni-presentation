@@ -8,26 +8,26 @@ class MyPreferences(context: Context) {
         context.getSharedPreferences("mySharedPreferences", Context.MODE_PRIVATE)
 
 
-    fun savePublicKey(publicKey: String) {
+    fun savePublicKey(publicKey: String?) {
         val editor = sharedPreferences.edit()
         editor.putString("publicKey", publicKey)
         editor.apply()
     }
 
-    fun savePrivateKey(privateKey: String) {
+    fun savePrivateKey(privateKey: String?) {
         val editor = sharedPreferences.edit()
         editor.putString("privateKey", privateKey)
         editor.apply()
     }
 
 
-    fun saveOldPublicKey(oldPublicKey: String) {
+    fun saveOldPublicKey(oldPublicKey: String?) {
         val editor = sharedPreferences.edit()
         editor.putString("oldPublicKey", oldPublicKey)
         editor.apply()
     }
 
-    fun saveoldPrivateKey(oldPrivateKey: String) {
+    fun saveoldPrivateKey(oldPrivateKey: String?) {
         val editor = sharedPreferences.edit()
         editor.putString("oldPrivateKey", oldPrivateKey)
         editor.apply()
@@ -50,30 +50,6 @@ class MyPreferences(context: Context) {
     fun getPrivateKey(): String? {
         return sharedPreferences.getString("privateKey", null)
     }
-
-
-    fun getErrorMessage(): String? {
-        return sharedPreferences.getString("errorMessage", null)
-    }
-
-
-
-    fun makeErrorMessageNull ()
-    {
-        val editor = sharedPreferences.edit()
-        editor.putString("errorMessage",null)
-        editor.apply()
-
-    }
-
-    fun saveErrorMessage(message: String?) {
-        val editor = sharedPreferences.edit()
-        editor.putString("errorMessage", message)
-        editor.apply()
-    }
-
-
-
 
 
 

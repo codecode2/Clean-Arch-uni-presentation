@@ -35,7 +35,6 @@ class KeysViewModel @Inject constructor(
 
              }
 
-
     fun ifTheKeysChanged(publicKey:String , privateKey: String)
     {
        runBlocking {
@@ -56,10 +55,6 @@ class KeysViewModel @Inject constructor(
         return getUserApiKeys.getPrivateKey().toString()
 
     }
-
-
-
-
 }
 
 

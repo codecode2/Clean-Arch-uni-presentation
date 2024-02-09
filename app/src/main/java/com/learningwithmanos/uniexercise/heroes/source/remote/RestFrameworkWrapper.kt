@@ -24,7 +24,8 @@ class DummyRestFrameworkWrapper @Inject constructor(
             timestamp = Constants.timeStamp,
             hash = Constants.hash(),
             limit = Constants.limit,
-            offset = 0
+            offset = 0,
+            orderBy= "modified"
         )
 
         if (response.isSuccessful) {
